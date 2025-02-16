@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteMaster - Advanced Note Taking App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>NoteMaster</h1>
+                <button id="newNoteBtn" class="btn-primary">
+                    <i class="fas fa-plus"></i> New Note
+                </button>
+            </div>
+            <div class="categories">
+                <h2>Categories</h2>
+                <div class="category-list" id="categoryList">
+                    <button class="category active" data-category="all">All Notes</button>
+                    <button class="category" data-category="work">Work</button>
+                    <button class="category" data-category="personal">Personal</button>
+                    <button class="category" data-category="ideas">Ideas</button>
+                </div>
+                <button id="addCategoryBtn" class="btn-secondary">
+                    <i class="fas fa-folder-plus"></i> Add Category
+                </button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search notes...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="notes-list" id="notesList"></div>
+        </aside>
+        
+        <main class="editor">
+            <div class="editor-header">
+                <input type="text" id="noteTitle" placeholder="Note Title" class="title-input">
+                <div class="toolbar">
+                    <select id="categorySelect">
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                        <option value="ideas">Ideas</option>
+                    </select>
+                    <button data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button data-command="underline" title="Underline"><i class="fas fa-underline"></i></button>
+                    <button data-command="insertUnorderedList" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+                    <button data-command="insertOrderedList" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                    <button data-command="createLink" title="Add Link"><i class="fas fa-link"></i></button>
+                    <div class="color-controls">
+                        <label>Text:</label>
+                        <input type="color" id="colorPicker" title="Text Color">
+                        <label>Background:</label>
+                        <input type="color" id="bgColorPicker" title="Background Color" value="#ffffff">
+                    </div>
+                </div>
+            </div>
+            <div id="noteContent" class="note-content" contenteditable="true"></div>
+            <div class="editor-footer">
+                <span id="lastSaved">Last saved: Never</span>
+                <div class="actions">
+                    <button id="saveNoteBtn" class="btn-save" title="Save Note">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <button id="exportBtn" class="btn-secondary" title="Export as PDF">
+                        <i class="fas fa-file-export"></i>
+                    </button>
+                    <button id="deleteNoteBtn" class="btn-danger" title="Delete Note">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="history-sidebar">
+            <div class="history-header">
+                <h2>History</h2>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </aside>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
