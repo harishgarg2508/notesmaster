@@ -3,85 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteMaster - Advanced Note Taking App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Finance Tracker - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional Custom Styles */
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/grid-pattern.svg');
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: 5%;
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            width: 100%;
+            max-width: 700px;
+            /* animation: float 6s ease-in infinite, fadeInRight 1.2s ; */
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+            z-index: 2;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.2);
+        }
+        
+        /* Floating Effect Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Wave Divider */
+        .wave-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 1;
+        }
+        
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+        
+        .wave-divider .shape-fill {
+            fill: var(--light-color);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--light-color);
+            position: relative;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .features h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            top: 0;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            background: var(--primary-color);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotateY(360deg);
+        }
+        
+        .income-icon { background: linear-gradient(135deg, #2980b9, #2c3e50); }
+        .expense-icon { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .savings-icon { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .reports-icon { background: linear-gradient(135deg, #f39c12, #f1c40f); }
+        
+        .feature-card h3 {
+            margin: 20px 0 15px;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        /* Dashboard Preview Section */
+        .dashboard-preview {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/circuit-pattern.svg');
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .dashboard-preview h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dashboard-preview h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+        }
+        
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dashboard-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .summary-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .summary-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .summary-card p {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .balance { color: #64ffda; }
+        .income { color: #69f0ae; }
+        .expense { color: #ff5252; }
+        
+        .chart-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            height: 300px;
+            position: relative;
+        }
+        
+        /* 3D Tilting Effect using JS */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        /* Stats Section (New) */
+        .stats-section {
+            padding: 80px 0;
+            background-color: #f9fafc;
+            text-align: center;
+        }
+        
+        .stats-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 30px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-desc {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Testimonials (New) */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            position: relative;
+        }
+        
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark-color);
+        }
+        
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '\201C';
+            font-size: 4rem;
+            color: rgba(0,0,0,0.1);
+            position: absolute;
+            left: -20px;
+            top: -20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            color: var(--dark-color);
+        }
+        
+        .author-info p {
+            margin: 5px 0 0;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 120px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/dots-pattern.svg');
+            opacity: 0.1;
+        }
+        
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+        }
+        
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        /* Animation for appear on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Particle background for CTA */
+        .particles-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            animation: float-particle 15s infinite;
+        }
+        
+        @keyframes float-particle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                padding: 100px 0 50px;
+                text-align: center;
+            }
+            
+            .hero-content {
+                margin: 0 auto 50px;
+                max-width: 90%;
+            }
+            
+            .hero-image {
+                position: relative;
+                right: auto;
+                width: 90%;
+                margin: 0 auto;
+            }
+            
+            .dashboard-container {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1>NoteMaster</h1>
-                <button id="newNoteBtn" class="btn-primary">
-                    <i class="fas fa-plus"></i> New Note
-                </button>
+    <div id="header-container"></div>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Master Your Money <span class="highlight">Effortlessly</span></h1>
+                <p>Experience the next generation of personal finance tracking. Get insightful reports, set goals, and watch your wealth grow.</p>
+                <a href="services.html" class="btn btn-primary">Start Your Journey</a>
             </div>
-            <div class="categories">
-                <h2>Categories</h2>
-                <div class="category-list" id="categoryList">
-                    <button class="category active" data-category="all">All Notes</button>
-                    <button class="category" data-category="work">Work</button>
-                    <button class="category" data-category="personal">Personal</button>
-                    <button class="category" data-category="ideas">Ideas</button>
-                </div>
-                <button id="addCategoryBtn" class="btn-secondary">
-                    <i class="fas fa-folder-plus"></i> Add Category
-                </button>
+            <div class="hero-image">
+                <img src="/assets/images/hero.jpg" alt="Finance Tracker Dashboard Preview">
             </div>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search notes...">
-                <i class="fas fa-search"></i>
+            
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                    <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                    <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+                </svg>
             </div>
-            <div class="notes-list" id="notesList"></div>
-        </aside>
-        
-        <main class="editor">
-            <div class="editor-header">
-                <input type="text" id="noteTitle" placeholder="Note Title" class="title-input">
-                <div class="toolbar">
-                    <select id="categorySelect">
-                        <option value="work">Work</option>
-                        <option value="personal">Personal</option>
-                        <option value="ideas">Ideas</option>
-                    </select>
-                    <button data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
-                    <button data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
-                    <button data-command="underline" title="Underline"><i class="fas fa-underline"></i></button>
-                    <button data-command="insertUnorderedList" title="Bullet List"><i class="fas fa-list-ul"></i></button>
-                    <button data-command="insertOrderedList" title="Numbered List"><i class="fas fa-list-ol"></i></button>
-                    <button data-command="createLink" title="Add Link"><i class="fas fa-link"></i></button>
-                    <div class="color-controls">
-                        <label>Text:</label>
-                        <input type="color" id="colorPicker" title="Text Color">
-                        <label>Background:</label>
-                        <input type="color" id="bgColorPicker" title="Background Color" value="#ffffff">
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="fade-in">Powerful Features</h2>
+                <div class="feature-cards">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon income-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3>Smart Income Tracking</h3>
+                        <p>Automatically categorize and analyze all your income sources with intelligent recognition.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon expense-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Expense Insights</h3>
+                        <p>Discover where your money goes with detailed categorization and spending pattern analysis.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon savings-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <h3>Goal-Based Savings</h3>
+                        <p>Set personalized savings targets and track your progress with visual milestone markers.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon reports-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Advanced Analytics</h3>
+                        <p>Get comprehensive financial reports with predictive insights and trend forecasting.</p>
                     </div>
                 </div>
             </div>
-            <div id="noteContent" class="note-content" contenteditable="true"></div>
-            <div class="editor-footer">
-                <span id="lastSaved">Last saved: Never</span>
-                <div class="actions">
-                    <button id="saveNoteBtn" class="btn-save" title="Save Note">
-                        <i class="fas fa-save"></i> Save
-                    </button>
-                    <button id="exportBtn" class="btn-secondary" title="Export as PDF">
-                        <i class="fas fa-file-export"></i>
-                    </button>
-                    <button id="deleteNoteBtn" class="btn-danger" title="Delete Note">
-                        <i class="fas fa-trash"></i>
-                    </button>
+        </section>
+
+            <section class="financial-dashboard-preview">
+                <div class="financial-container">
+                    <h2 class="financial-fade-in">Your Financial Command Center</h2>
+                <div class="financial-dashboard-container financial-tilt-card financial-fade-in">
+                    <div class="financial-summary">
+                        <div class="financial-summary-card">
+                            <h3>Total Balance</h3>
+                            <p class="financial-balance">$<span id="total-balance">50000.00</span></p>
+                        </div>
+                        <div class="financial-summary-card">
+                            <h3>Monthly Income</h3>
+                            <p class="financial-income">$<span id="monthly-income">100560.00</span></p>
+                        </div>
+                        <div class="financial-summary-card">
+                            <h3>Monthly Expenses</h3>
+                            <p class="financial-expense">$<span id="monthly-expenses">632220.00</span></p>
+                        </div>
+                    </div>
+                    <div class="financial-chart-container">
+                        <img src="https://images.stockcake.com/public/8/4/7/84786d51-cf96-41df-8cb6-00d834c1a4a8_large/future-finance-visualized-stockcake.jpg" alt="Fake Chart" class="fake-chart-image">
+                    </div>
                 </div>
             </div>
-        </main>
-
-        <aside class="history-sidebar">
-            <div class="history-header">
-                <h2>History</h2>
+        </section>
+        
+        <!-- New Section: Stats -->
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="fade-in">Trusted by Thousands</h2>
+                <div class="stats-container">
+                    <div class="stat-card fade-in">
+                        <div class="stat-number" id="users-count">50,000+</div>
+                        <div class="stat-desc">Active Users</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number" id="savings-count">$2.5M+</div>
+                        <div class="stat-desc">Total Savings</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number" id="transactions-count">10M+</div>
+                        <div class="stat-desc">Transactions Tracked</div>
+                    </div>
+                </div>
             </div>
-            <div class="history-list" id="historyList"></div>
-        </aside>
-    </div>
-    <script src="main.js"></script>
+        </section>
+        
+        <!-- New Section: Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="fade-in">What Our Users Say</h2>
+                <div class="testimonials-slider fade-in">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            This finance tracker has completely changed how I manage my money. I've saved over $5,000 in just six months by identifying unnecessary expenses!
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Sarah J." class="author-image">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Marketing Specialist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="particles-bg" id="particles"></div>
+            <div class="container">
+                <h2 class="fade-in">Ready to Transform Your Finances?</h2>
+                <p class="fade-in">Join thousands of users who have already taken control of their financial future.</p>
+                <a href="services/income-tracker.html" class="btn btn-large fade-in">Start Your Financial Journey</a>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script>
+        // Load demo data for homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('total-balance').textContent = '2,540.75';
+            document.getElementById('monthly-income').textContent = '3,200.00';
+            document.getElementById('monthly-expenses').textContent = '2,150.25';
+            
+            // Initialize homepage charts
+            if (typeof initializeOverviewChart === 'function') {
+                initializeOverviewChart();
+            }
+            
+            // Create tilt effect
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+                    
+                    card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'rotateX(0) rotateY(0)';
+                });
+            });
+            
+            // Create particles for CTA background
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                createParticle(particlesContainer);
+            }
+            
+            // Fade in elements on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Animate stat counters
+            animateStatCounters();
+        });
+        
+        // Function to create particles
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random size
+            const size = Math.random() * 15 + 5;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation duration
+            const duration = Math.random() * 10 + 10;
+            particle.style.animationDuration = `${duration}s`;
+            
+            // Random delay
+            const delay = Math.random() * 5;
+            particle.style.animationDelay = `${delay}s`;
+            
+            container.appendChild(particle);
+        }
+        
+        // Function to animate stat counters
+     // Function to animate stat counters
+function animateStatCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = counter.textContent;
+        const isNumber = !target.includes('+') && !target.includes('$');
+        let startValue = 0;
+        let endValue = isNumber ? parseInt(target) : parseInt(target.replace(/[^0-9.-]+/g, ''));
+        const duration = 2000;
+        let startTime = null;
+        
+        function updateCounter(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const currentValue = Math.floor(progress * endValue);
+            
+            if (target.includes('$')) {
+                counter.textContent = '$' + currentValue.toLocaleString() + '+';
+            } else if (target.includes('+')) {
+                counter.textContent = currentValue.toLocaleString() + '+';
+            } else {
+                counter.textContent = currentValue.toLocaleString();
+            }
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        }
+        
+        requestAnimationFrame(updateCounter);
+    });
+}
+
+// Include this script in your HTML file
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('overview-chart').getContext('2d');
+    const overviewChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Total Balance', 'Monthly Income', 'Monthly Expenses'],
+            datasets: [{
+                data: [50000, 100560, 632220],
+                backgroundColor: ['#4CAF50', '#36A2EB', '#FF6384'],
+                hoverBackgroundColor: ['#45a049', '#2e8bcb', '#ff4c61']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Financial Overview'
+                }
+            }
+        }
+    });
+});
+
+</script>
 </body>
 </html>

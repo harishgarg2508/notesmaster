@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tracker - Finance Tracker</title>
+    <link rel="stylesheet" href="./income-tracker.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <a href="/services.html">Go back</a>
+        <header class="header fade-in">
+            <h1>Income Tracker</h1>
+            <p>Track and categorize your income sources to gain a clear picture of your financial inflow.</p>
+        </header>
+        
+        <main class="container">
+            <div class="dashboard-stats slide-in">
+                <div class="stat-card">
+                    <h3>Total Income</h3>
+                    <p id="totalIncome">$0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>This Month</h3>
+                    <p id="monthlyIncome">$0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Income</h3>
+                    <p id="averageIncome">$0</p>
+                </div>
+            </div>
+
+            <section class="income-form slide-in">
+                <h2>Add New Income</h2>
+                <form id="incomeForm">
+                    <div class="form-group">
+                        <input type="text" id="incomeSource" placeholder="Source of Income" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="incomeAmount" placeholder="Amount" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="incomeDate" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="incomeCategory" required>
+                            <option value="salary">Salary</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="investments">Investments</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Income</button>
+                </form>
+            </section>
+            
+            <section class="income-chart slide-in">
+                <h2>Income Overview</h2>
+                <canvas id="incomeChart"></canvas>
+            </section>
+            
+            <section class="income-list fade-in">
+                <h2>Recent Income Entries</h2>
+                <div class="table-container">
+                    <table id="incomeTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Source</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomeEntries"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../../assets/js/main.js"></script>
+    <script src="income-tracker.js"></script>
+</body>
+</html>

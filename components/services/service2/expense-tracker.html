@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Finance Tracker</title>
+    <link rel="stylesheet" href="./expense-tracker.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <a href="/services.html">Go back</a>
+        <header class="header fade-in">
+            <h1>Expense Tracker</h1>
+            <p>Track your spending habits and identify areas where you can cut back and save more.</p>
+        </header>
+        
+        <main class="container">
+            <div class="dashboard-stats slide-in">
+                <div class="stat-card">
+                    <h3>Total Expenses</h3>
+                    <p id="totalExpenses">$0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>This Month</h3>
+                    <p id="monthlyExpenses">$0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Expense</h3>
+                    <p id="averageExpense">$0</p>
+                </div>
+            </div>
+
+            <section class="expense-form slide-in">
+                <h2>Add New Expense</h2>
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <input type="text" id="expenseSource" placeholder="Expense Source" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="expenseAmount" placeholder="Amount" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="expenseCategory" required>
+                            <option value="food">Food</option>
+                            <option value="transport">Transport</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Expense</button>
+                </form>
+            </section>
+            
+            <section class="expense-chart slide-in">
+                <h2>Expense Overview</h2>
+                <canvas id="expenseChart"></canvas>
+            </section>
+            
+            <section class="expense-list fade-in">
+                <h2>Recent Expense Entries</h2>
+                <div class="table-container">
+                    <table id="expenseTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Source</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseEntries"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="expense-tracker.js"></script>
+</body>
+</html>
