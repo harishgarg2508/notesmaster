@@ -9,8 +9,22 @@
 </head>
 <body>
     <div class="app-container">
-        <a href="/services.html">Go back</a>
-        <header class="header fade-in">
+        <a href="/services.html" style="
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, transform 0.3s;
+        font-weight: bold;
+    "
+    onmouseover="this.style.backgroundColor='#45a049'; this.style.transform='scale(1.05)';"
+    onmouseout="this.style.backgroundColor='#4CAF50'; this.style.transform='scale(1)';"
+    >Go back</a>
+            <header class="header fade-in">
             <h1>Income Tracker</h1>
             <p>Track and categorize your income sources to gain a clear picture of your financial inflow.</p>
         </header>
